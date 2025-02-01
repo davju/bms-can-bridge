@@ -132,3 +132,10 @@ float TinyBMSImpl::convertIEEEFloat(const std::vector<uint8_t> &data)
     std::memcpy(&value, data_copy.data(), sizeof(float));
     return value;
 }
+
+bool TinyBMSImpl::setupComunication(uint32_t baudrate, uint8_t data_bits, uint8_t stop_bits, bool has_parity_bit)
+{
+    com = std::make_shared<UartComImpl>();
+    com->setupUart(baudrate, data_bits, stop_bits, has_parity_bit);
+    return true;
+}

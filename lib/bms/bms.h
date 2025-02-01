@@ -23,7 +23,8 @@ private:
 public:
     virtual ~BMS() = default;
     // Read the pack voltage from the BMS
-    virtual std::vector<uint8_t> createReadWordCommand(READ_WORDS readWord) = 0;
+
+        virtual std::vector<uint8_t> createReadWordCommand(READ_WORDS readWord) = 0;
 
     virtual float decodeBMSResponse(const std::vector<uint8_t> &response) = 0;
 };

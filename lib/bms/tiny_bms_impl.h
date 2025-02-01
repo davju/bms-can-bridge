@@ -13,6 +13,7 @@
 #include <algorithm>
 #include "crc.h"
 #include "bms.h"
+#include "uart_com_impl.h"
 
 class TinyBMSImpl : public BMS
 {
@@ -33,9 +34,13 @@ public:
 
     float decodeBMSResponse(const std::vector<uint8_t> &response) override;
 
+    bool setupComunication(uint32_t baudrate, uint8_t data_bits, uint8_t stop_bits, bool has_parity_bit);
+
 private:
     // Private constructor to prevent instantiation
-    TinyBMSImpl() {}
+    TinyBMSImpl()
+    {
+    }
     std::vector<uint8_t> addCRC(std::vector<uint8_t> &data);
 
     bool checkCRC(const std::vector<uint8_t> &response);
@@ -43,6 +48,8 @@ private:
     std::vector<uint8_t> extractPayload(const std::vector<uint8_t> &response);
 
     float convertIEEEFloat(const std::vector<uint8_t> &data);
+
+    std::shared_ptr<UartComInterface> com;
 };
 
 #endif // TINY_BMS_H
