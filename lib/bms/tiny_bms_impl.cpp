@@ -135,7 +135,15 @@ float TinyBMSImpl::convertIEEEFloat(const std::vector<uint8_t> &data)
 
 bool TinyBMSImpl::setupComunication(uint32_t baudrate, uint8_t data_bits, uint8_t stop_bits, bool has_parity_bit)
 {
-    com = std::make_shared<UartComImpl>();
+    com = UartComFactory::createUartComImpl();
     com->setupUart(baudrate, data_bits, stop_bits, has_parity_bit);
     return true;
+}
+
+float TinyBMSImpl::fetchCommand(READ_WORDS readWord)
+{
+    std::vector<uint8_t> command = createReadWordCommand(readWord);
+    com->send(command);
+    std::vector<uint8_t> response = com->receive(1000);
+    return decodeBMSResponse(response);
 }

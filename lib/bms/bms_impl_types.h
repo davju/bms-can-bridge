@@ -1,0 +1,4 @@
+enum BMS_IMPL_TYPES
+{
+    TINY_BMS
+};

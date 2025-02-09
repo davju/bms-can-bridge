@@ -65,3 +65,13 @@ TEST(TinyBMSTest, ParseResponseInt)
     EXPECT_NE(bms->decodeBMSResponse(data), 0);
     EXPECT_EQ(bms->decodeBMSResponse(data), 64);
 }
+
+/*
+TEST(TinyBMSTest, FetchCommandTest)
+{
+    std::shared_ptr<TinyBMSImpl> bms = TinyBMSImpl::getInstance();
+    bms->setupComunication(9600, 8, 1, false);
+    float response = bms->fetchCommand(READ_WORDS::PACK_VOLTAGE);
+    EXPECT_NE(response, 0);
+}
+*/

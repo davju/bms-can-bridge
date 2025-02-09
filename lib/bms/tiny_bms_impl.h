@@ -14,6 +14,7 @@
 #include "crc.h"
 #include "bms.h"
 #include "uart_com_impl.h"
+#include "uart_com_factory.h"
 
 class TinyBMSImpl : public BMS
 {
@@ -33,7 +34,7 @@ public:
     std::vector<uint8_t> createReadWordCommand(READ_WORDS readWord) override;
 
     float decodeBMSResponse(const std::vector<uint8_t> &response) override;
-
+    float fetchCommand(READ_WORDS readWord) override;
     bool setupComunication(uint32_t baudrate, uint8_t data_bits, uint8_t stop_bits, bool has_parity_bit);
 
 private:
